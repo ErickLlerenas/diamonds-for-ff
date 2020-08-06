@@ -38,7 +38,7 @@ class _AdsScreenState extends State<AdsScreen> {
               ButtonTheme(
                 minWidth: double.infinity,
                 height: 60,
-                child: RaisedButton(
+                child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.yellow[600],
                   onPressed: () {},
@@ -62,7 +62,7 @@ class _AdsScreenState extends State<AdsScreen> {
               ButtonTheme(
                 minWidth: double.infinity,
                 height: 120,
-                child: RaisedButton(
+                child: FlatButton(
                   color: Colors.blue,
                   textColor: Colors.white,
                   onPressed: () => AppLovin.requestInterstitial(
