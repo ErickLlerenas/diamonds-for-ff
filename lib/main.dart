@@ -1,9 +1,18 @@
 import 'package:diamonds_for_ff/screens/ads_screen.dart';
 import 'package:diamonds_for_ff/screens/awards_screen.dart';
 import 'package:diamonds_for_ff/screens/home_screen.dart';
+import 'package:diamonds_for_ff/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.grey[50], // navigation bar color
+    statusBarColor: Colors.blue, // status bar color
+  ));
+  return runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -30,24 +39,25 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            drawer: CustomDrawer(),
             body: _widgetOptions.elementAt(_selectedIndex),
             bottomNavigationBar: BottomNavigationBar(
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.play_circle_outline),
-                  title: Text('Anuncios'),
+                  icon: FaIcon(FontAwesomeIcons.ad),
+                  title: Text('Ganar'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text('Inicio'),
+                  icon: FaIcon(FontAwesomeIcons.coins),
+                  title: Text('Puntos'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.attach_money),
+                  icon: FaIcon(FontAwesomeIcons.gem),
                   title: Text('Premios'),
                 ),
               ],
               currentIndex: _selectedIndex,
-              selectedItemColor: Colors.amber[800],
+              selectedItemColor: Colors.blue,
               onTap: _onItemTapped,
             )));
   }
