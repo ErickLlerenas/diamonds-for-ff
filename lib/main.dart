@@ -1,7 +1,7 @@
 import 'package:diamonds_for_ff/screens/ads_screen.dart';
 import 'package:diamonds_for_ff/screens/awards_screen.dart';
 import 'package:diamonds_for_ff/screens/home_screen.dart';
-import 'package:diamonds_for_ff/widgets/custom_drawer.dart';
+import 'package:diamonds_for_ff/widgets/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            drawer: CustomDrawer(),
+            drawer: MyDrawer(),
             body: _widgetOptions.elementAt(_selectedIndex),
             bottomNavigationBar: BottomNavigationBar(
               items: <BottomNavigationBarItem>[

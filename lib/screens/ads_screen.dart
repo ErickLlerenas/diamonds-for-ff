@@ -25,19 +25,20 @@ class _AdsScreenState extends State<AdsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          margin: EdgeInsets.all(50),
+          margin: EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                   height: MediaQuery.of(context).size.height / 3,
+                  width: MediaQuery.of(context).size.width/1.5,
                   child: SvgPicture.asset('assets/invest.svg')),
               SizedBox(
                 height: 20,
               ),
               ButtonTheme(
                 minWidth: double.infinity,
-                height: 60,
+                height: 70,
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.yellow[600],
@@ -49,7 +50,7 @@ class _AdsScreenState extends State<AdsScreen> {
                         style: TextStyle(fontSize: 24),
                       ),
                       Text(
-                        'Recoger Recompensa Diaria',
+                        'Recompensa diaria',
                         style: TextStyle(fontSize: 18),
                       ),
                     ],
@@ -61,7 +62,7 @@ class _AdsScreenState extends State<AdsScreen> {
               ),
               ButtonTheme(
                 minWidth: double.infinity,
-                height: 120,
+                height: 70,
                 child: FlatButton(
                   color: Colors.blue,
                   textColor: Colors.white,
@@ -72,10 +73,10 @@ class _AdsScreenState extends State<AdsScreen> {
                     children: <Widget>[
                       Text(
                         '+10',
-                        style: TextStyle(fontSize: 38),
+                        style: TextStyle(fontSize: 24),
                       ),
                       Text(
-                        'Ganar Puntos',
+                        'Ganar puntos',
                         style: TextStyle(fontSize: 18),
                       ),
                     ],

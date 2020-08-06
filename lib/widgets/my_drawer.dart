@@ -1,10 +1,50 @@
 import 'package:diamonds_for_ff/screens/how_it_works.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class CustomDrawer extends StatelessWidget {
+class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void _showDialog() {
+      // flutter defined function
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Text("¡Gana 100 puntos!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey[700], fontWeight: FontWeight.bold)),
+            content: Container(
+              height: 120,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "Danos una reseña de 5 estrellas y recibe 100 puntos.",
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FlatButton(
+                    onPressed: () async {
+                      const url = "https://play.google.com/store/apps/details?id=com.ejele.tracker";
+                      if (await canLaunch(url)) launch(url);
+                    },
+                    child: Text("VA"),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the drawer if there isn't enough vertical
@@ -14,14 +54,14 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text("Ashish Rawat"),
-            accountEmail: Text("ashishrawat2911@gmail.com"),
+            accountName: Text("Ducky Tie"),
+            accountEmail: Text("urbanspot@gmail.com"),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
                   ? Colors.blue
                   : Colors.white,
               child: Text(
-                "A",
+                "D",
                 style: TextStyle(fontSize: 40.0),
               ),
             ),
@@ -30,30 +70,28 @@ class CustomDrawer extends StatelessWidget {
             leading: FaIcon(
               FontAwesomeIcons.solidStar,
               color: Colors.yellow[700],
-              size: 32,
+              size: 28,
             ),
             trailing: Icon(Icons.navigate_next),
             title: Text(
-              'Danos 5 Estrellas',
-              style: TextStyle(fontSize: 18),
+              'Danos 5 estrellas',
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
               Navigator.pop(context);
+              _showDialog();
             },
           ),
           ListTile(
             leading: FaIcon(
               FontAwesomeIcons.question,
               color: Colors.blue,
-              size: 32,
+              size: 28,
             ),
             trailing: Icon(Icons.navigate_next),
             title: Text(
-              '¿Cómo Funciona?',
-              style: TextStyle(fontSize: 18),
+              '¿Cómo funciona?',
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -66,11 +104,12 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: FaIcon(
               FontAwesomeIcons.signOutAlt,
-              size: 32,
+              color: Colors.grey[700],
+              size: 28,
             ),
             title: Text(
-              'Cerrar Sesión',
-              style: TextStyle(fontSize: 18),
+              'Cerrar sesión',
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () {
               // Update the state of the app
