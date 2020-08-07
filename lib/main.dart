@@ -1,17 +1,14 @@
-import 'package:diamonds_for_ff/screens/ads_screen.dart';
-import 'package:diamonds_for_ff/screens/awards_screen.dart';
-import 'package:diamonds_for_ff/screens/home_screen.dart';
-import 'package:diamonds_for_ff/widgets/my_drawer.dart';
+import 'package:diamonds_for_ff/screens/home.dart';
+import 'package:diamonds_for_ff/screens/login_google.dart';
+import 'package:diamonds_for_ff/states/login_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.grey[50], // navigation bar color
-    statusBarColor: Colors.blue, // status bar color
-  ));
-  return runApp(MyApp());
+main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: LoginState()),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -20,45 +17,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<Widget> _widgetOptions = <Widget>[
-    AdsScreen(),
-    HomeScreen(),
-    AdwardsScreen()
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final loginState = Provider.of<LoginState>(context);
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            drawer: MyDrawer(),
-            body: _widgetOptions.elementAt(_selectedIndex),
-            bottomNavigationBar: BottomNavigationBar(
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.ad),
-                  title: Text('Ganar'),
-                ),
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.coins),
-                  title: Text('Puntos'),
-                ),
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.gem),
-                  title: Text('Premios'),
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.blue,
-              onTap: _onItemTapped,
-            )));
+      home: loginState.isLoggedIn ? Home() : LogInGoogle()
+    );
   }
 }
