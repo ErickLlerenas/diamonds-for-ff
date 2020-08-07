@@ -110,12 +110,11 @@ class MyDrawer extends StatelessWidget {
               'Política de Privacidad',
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
-            onTap: () {
+            onTap: () async {
+              const url =
+                  "https://erickllerenas.github.io/diamantes-free-fire-policy/";
+              if (await canLaunch(url)) launch(url);
               Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HowItWorks()),
-              );
             },
           ),
           ListTile(
