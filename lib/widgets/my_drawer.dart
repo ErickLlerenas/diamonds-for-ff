@@ -101,6 +101,24 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
+              FontAwesomeIcons.checkCircle,
+              color: Colors.blue,
+              size: 28,
+            ),
+            trailing: Icon(Icons.navigate_next),
+            title: Text(
+              'Política de Privacidad',
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            ),
+            onTap: () async {
+              const url =
+                  "https://erickllerenas.github.io/diamantes-free-fire-policy/";
+              if (await canLaunch(url)) launch(url);
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: FaIcon(
               FontAwesomeIcons.signOutAlt,
               color: Colors.grey[700],
               size: 28,
