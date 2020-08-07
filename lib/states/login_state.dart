@@ -5,17 +5,17 @@ class LoginState with ChangeNotifier {
   bool isLoggedIn = false;
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  login() async{
-    try{
+  login() async {
+    try {
       await googleSignIn.signIn();
       isLoggedIn = true;
       notifyListeners();
-    } catch (err){
+    } catch (err) {
       print(err);
     }
   }
 
-  logout(){
+  logout() {
     googleSignIn.signOut();
     isLoggedIn = false;
     notifyListeners();

@@ -60,7 +60,9 @@ class MyDrawer extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountName: Text(loginState.googleSignIn.currentUser.displayName),
             accountEmail: Text(loginState.googleSignIn.currentUser.email),
-            currentAccountPicture: Image.network(loginState.googleSignIn.currentUser.photoUrl, height: 50.0, width: 50.0),
+            currentAccountPicture: CircleAvatar(
+                backgroundImage:
+                    NetworkImage(loginState.googleSignIn.currentUser.photoUrl)),
           ),
           ListTile(
             leading: FaIcon(
