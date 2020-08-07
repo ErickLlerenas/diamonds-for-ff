@@ -25,6 +25,9 @@ class _LogInGoogleState extends State<LogInGoogle> {
                 height: 20,
               ),
               FaIcon(FontAwesomeIcons.gem,color: Colors.lightBlue,size: 200,),
+              SizedBox(
+                height: 20,
+              ),
               GoogleSignInButton(
         onPressed: () {
               loginState.login();
