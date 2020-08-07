@@ -101,6 +101,25 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
+              FontAwesomeIcons.checkCircle,
+              color: Colors.blue,
+              size: 28,
+            ),
+            trailing: Icon(Icons.navigate_next),
+            title: Text(
+              'Política de Privacidad',
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HowItWorks()),
+              );
+            },
+          ),
+          ListTile(
+            leading: FaIcon(
               FontAwesomeIcons.signOutAlt,
               color: Colors.grey[700],
               size: 28,

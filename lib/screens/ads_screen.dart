@@ -1,6 +1,7 @@
+import 'package:diamonds_for_ff/states/app_state.dart';
 import 'package:flutter/material.dart';
-import 'package:applovin/applovin.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class AdsScreen extends StatefulWidget {
   @override
@@ -9,20 +10,8 @@ class AdsScreen extends StatefulWidget {
 
 class _AdsScreenState extends State<AdsScreen> {
   @override
-  void initState() {
-    AppLovin.init();
-    super.initState();
-  }
-
-  listener(AppLovinAdListener event, bool isInter) {
-    print(event);
-    if (event == AppLovinAdListener.adReceived) {
-      AppLovin.showInterstitial(interstitial: isInter);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       body: Container(
           margin: EdgeInsets.all(30),
@@ -31,8 +20,8 @@ class _AdsScreenState extends State<AdsScreen> {
             children: <Widget>[
               Container(
                   height: MediaQuery.of(context).size.height / 3,
-                  width: MediaQuery.of(context).size.width/1.5,
-                  child: SvgPicture.asset('assets/invest.svg')),
+                  width: MediaQuery.of(context).size.width / 1.5,
+                  child: SvgPicture.asset('assets/money.svg')),
               SizedBox(
                 height: 20,
               ),
@@ -42,7 +31,7 @@ class _AdsScreenState extends State<AdsScreen> {
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.yellow[600],
-                  onPressed: () {},
+                  onPressed: () => appState.requestInterstitial(),
                   child: Column(
                     children: <Widget>[
                       Text(
@@ -66,9 +55,7 @@ class _AdsScreenState extends State<AdsScreen> {
                 child: FlatButton(
                   color: Colors.blue,
                   textColor: Colors.white,
-                  onPressed: () => AppLovin.requestInterstitial(
-                      (AppLovinAdListener event) => listener(event, true),
-                      interstitial: true),
+                  onPressed: () {},
                   child: Column(
                     children: <Widget>[
                       Text(
