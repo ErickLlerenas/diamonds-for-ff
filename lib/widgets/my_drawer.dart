@@ -1,11 +1,14 @@
 import 'package:diamonds_for_ff/screens/how_it_works.dart';
+import 'package:diamonds_for_ff/states/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final loginState = Provider.of<LoginState>(context);
     void _showDialog() {
       // flutter defined function
       showDialog(
@@ -30,7 +33,8 @@ class MyDrawer extends StatelessWidget {
                   ),
                   FlatButton(
                     onPressed: () async {
-                      const url = "https://play.google.com/store/apps/details?id=com.ejele.tracker";
+                      const url =
+                          "https://play.google.com/store/apps/details?id=com.ejele.tracker";
                       if (await canLaunch(url)) launch(url);
                     },
                     child: Text("VA"),
@@ -54,17 +58,9 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text("Ducky Tie"),
-            accountEmail: Text("urbanspot@gmail.com"),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
-                  ? Colors.blue
-                  : Colors.white,
-              child: Text(
-                "D",
-                style: TextStyle(fontSize: 40.0),
-              ),
-            ),
+            accountName: Text(loginState.googleSignIn.currentUser.displayName),
+            accountEmail: Text(loginState.googleSignIn.currentUser.email),
+            currentAccountPicture: Image.network(loginState.googleSignIn.currentUser.photoUrl, height: 50.0, width: 50.0),
           ),
           ListTile(
             leading: FaIcon(
@@ -112,10 +108,8 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
               Navigator.pop(context);
+              loginState.logout();
             },
           ),
         ],
