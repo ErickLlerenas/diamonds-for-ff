@@ -1,4 +1,4 @@
-import 'package:diamonds_for_ff/states/login_state.dart';
+import 'package:diamonds_for_ff/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,7 @@ class LogInGoogle extends StatefulWidget {
 class _LogInGoogleState extends State<LogInGoogle> {
   @override
   Widget build(BuildContext context) {
-    final loginState = Provider.of<LoginState>(context);
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       body: Center(
           child: Column(
@@ -30,7 +30,7 @@ class _LogInGoogleState extends State<LogInGoogle> {
               ),
               GoogleSignInButton(
         onPressed: () {
-              loginState.login();
+              appState.login();
         },
         splashColor: Colors.white,
         // setting splashColor to Colors.transparent will remove button ripple effect.

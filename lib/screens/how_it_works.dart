@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HowItWorks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('¿Cómo Funciona?'),
-      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(30),
+          margin: EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 30,),
+               Text("¿Cómo funciona?",style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.bold,fontSize: 30),),
+              Text("Información sobre nuestra app",style: TextStyle(color:Colors.grey[700]),),
+                            SizedBox(height: 30,),
+
               Container(
                   height: MediaQuery.of(context).size.height / 3,
-                  child: SvgPicture.asset('assets/question.svg')),
+                  child: Image.asset('assets/question.png')),
                   SizedBox(
                     height: 30,
                   ),
