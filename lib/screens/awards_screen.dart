@@ -15,14 +15,10 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 40),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
               Text(
                 "Canjea Diamantes",
                 style: TextStyle(

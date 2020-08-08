@@ -27,28 +27,31 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-        Scaffold(
-            drawer: MyDrawer(),
-            body: _widgetOptions.elementAt(_selectedIndex),
-            bottomNavigationBar: BottomNavigationBar(
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.ad),
-                  title: Text('Ganar'),
-                ),
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.coins),
-                  title: Text('Puntos'),
-                ),
-                BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.gem),
-                  title: Text('Premios'),
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.blue,
-              onTap: _onItemTapped,
-            ));
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        drawer: MyDrawer(),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.ad),
+              title: Text('Ganar'),
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.coins),
+              title: Text('Puntos'),
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.gem),
+              title: Text('Premios'),
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.blue,
+          onTap: _onItemTapped,
+        ));
   }
 }

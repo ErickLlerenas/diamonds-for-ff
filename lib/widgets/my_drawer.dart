@@ -59,10 +59,15 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(appState.googleSignIn.currentUser.displayName),
-            accountEmail: Text(appState.googleSignIn.currentUser.email),
+            decoration: BoxDecoration(color: Colors.blue),
+            accountName: Text(
+              appState.googleSignIn.currentUser.displayName,
+              style: TextStyle(color: Colors.white),
+            ),
+            accountEmail: Text(appState.googleSignIn.currentUser.email,
+                style: TextStyle(color: Colors.white)),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 backgroundImage:
                     NetworkImage(appState.googleSignIn.currentUser.photoUrl)),
           ),

@@ -10,8 +10,7 @@ main() {
       statusBarColor: Colors.grey[50],
       systemNavigationBarColor: Colors.grey[50],
       systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark
-    ));
+      statusBarIconBrightness: Brightness.dark));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: AppState()),
@@ -28,7 +27,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: appState.isLoggedIn ? Home() : LogInGoogle());
+        theme: new ThemeData(
+            primarySwatch: Colors.grey,
+            primaryTextTheme:
+                TextTheme(headline6: TextStyle(color: Colors.white))),
+        debugShowCheckedModeBanner: false,
+        home: appState.isLoggedIn ? Home() : LogInGoogle());
   }
 }
