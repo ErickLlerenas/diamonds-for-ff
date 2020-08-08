@@ -3,9 +3,16 @@ import 'package:diamonds_for_ff/screens/login_google.dart';
 import 'package:diamonds_for_ff/states/app_state.dart';
 import 'package:diamonds_for_ff/states/login_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.grey[50],
+      systemNavigationBarColor: Colors.grey[50],
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark
+    ));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: LoginState()),
@@ -22,6 +29,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final loginState = Provider.of<LoginState>(context);
-    return MaterialApp(home: loginState.isLoggedIn ? Home() : LogInGoogle());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: loginState.isLoggedIn ? Home() : LogInGoogle());
   }
 }
