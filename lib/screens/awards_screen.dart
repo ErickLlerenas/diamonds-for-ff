@@ -13,12 +13,28 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 40),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Canjea Diamantes",
+                style: TextStyle(
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
+              Text("Escoge uno de nuestros premios",
+                  style: TextStyle(color: Colors.grey[700])),
+              SizedBox(
+                height: 20,
+              ),
               Wrap(
                 children: <Widget>[
                   InkWell(
@@ -61,7 +77,7 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
                             ],
                           )),
                       width: MediaQuery.of(context).size.width / 2.25,
-                      height: MediaQuery.of(context).size.width / 1.4,
+                      height: MediaQuery.of(context).size.width / 1.7,
                     ),
                   ),
                   InkWell(
@@ -105,7 +121,7 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
                             ],
                           )),
                       width: MediaQuery.of(context).size.width / 2.25,
-                      height: MediaQuery.of(context).size.width / 1.4,
+                      height: MediaQuery.of(context).size.width / 1.7,
                     ),
                   ),
                   InkWell(
@@ -148,7 +164,7 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
                             ],
                           )),
                       width: MediaQuery.of(context).size.width / 2.25,
-                      height: MediaQuery.of(context).size.width / 1.4,
+                      height: MediaQuery.of(context).size.width / 1.7,
                     ),
                   ),
                   InkWell(
@@ -204,7 +220,7 @@ class _AdwardsScreenState extends State<AdwardsScreen> {
                             ],
                           )),
                       width: MediaQuery.of(context).size.width / 2.25,
-                      height: MediaQuery.of(context).size.width / 1.4,
+                      height: MediaQuery.of(context).size.width / 1.7,
                     ),
                   ),
                 ],

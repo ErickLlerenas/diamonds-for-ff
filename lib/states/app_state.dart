@@ -1,11 +1,38 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:applovin/applovin.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AppState with ChangeNotifier {
   int points = 0;
+  bool isLoggedIn = false;
+  String playerID;
+  bool reviewed5Star;
+  bool dailyReward;
+
+  GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+  final _controller = TextEditingController();
+
   AppState() {
     AppLovin.init();
+  }
+
+  login() async {
+    try {
+      await googleSignIn.signIn();
+      isLoggedIn = true;
+      initValuesFireStore();
+      notifyListeners();
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  logout() {
+    googleSignIn.signOut();
+    isLoggedIn = false;
+    notifyListeners();
   }
 
   listener(AppLovinAdListener event, bool isInter) {
@@ -15,17 +42,40 @@ class AppState with ChangeNotifier {
     }
   }
 
+  initValuesFireStore() {
+    //Checks if the user has been registered before, if not creates an instance
+    print(Firestore.instance
+        .collection('users')
+        .document(googleSignIn.currentUser.email)
+        .get()
+        .then((doc) {
+      if (!doc.exists) {
+        Firestore.instance
+            .collection('users')
+            .document(googleSignIn.currentUser.email)
+            .setData({'points':0,'reviewed5Star':false,'dailyReward':false,'playerID':null});
+      }
+    }));
+  }
+
   requestInterstitial() {
     AppLovin.requestInterstitial((AppLovinAdListener event) {
       listener(event, true);
-      print('XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD $event');
       if (event == AppLovinAdListener.adHidden) {
+         Firestore.instance
+            .collection('users')
+            .document(googleSignIn.currentUser.email).get().then((doc){
+              
+            });
         points += 10;
+        Firestore.instance
+            .collection('users')
+            .document(googleSignIn.currentUser.email)
+            .updateData({'points': 1200});
       }
     }, interstitial: true);
   }
 
-  final _controller = TextEditingController();
   void showBuyDiamondsDialog(context, {int diamonds, int cost, String info}) {
     showDialog(
       context: context,

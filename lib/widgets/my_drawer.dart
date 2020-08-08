@@ -1,5 +1,5 @@
 import 'package:diamonds_for_ff/screens/how_it_works.dart';
-import 'package:diamonds_for_ff/states/login_state.dart';
+import 'package:diamonds_for_ff/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final loginState = Provider.of<LoginState>(context);
+    final appState = Provider.of<AppState>(context);
     void _showDialog() {
       // flutter defined function
       showDialog(
@@ -21,11 +21,12 @@ class MyDrawer extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.grey[700], fontWeight: FontWeight.bold)),
             content: Container(
-              height: 120,
+              height: 110,
               child: Column(
                 children: <Widget>[
                   Text(
                     "Danos una reseña de 5 estrellas y recibe 100 puntos.",
+                    textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   SizedBox(
@@ -37,7 +38,7 @@ class MyDrawer extends StatelessWidget {
                           "https://play.google.com/store/apps/details?id=com.ejele.tracker";
                       if (await canLaunch(url)) launch(url);
                     },
-                    child: Text("VA"),
+                    child: Text("Dar reseña"),
                     color: Colors.blue,
                     textColor: Colors.white,
                   )
@@ -58,11 +59,12 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(loginState.googleSignIn.currentUser.displayName),
-            accountEmail: Text(loginState.googleSignIn.currentUser.email),
+            accountName: Text(appState.googleSignIn.currentUser.displayName),
+            accountEmail: Text(appState.googleSignIn.currentUser.email),
             currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.transparent,
                 backgroundImage:
-                    NetworkImage(loginState.googleSignIn.currentUser.photoUrl)),
+                    NetworkImage(appState.googleSignIn.currentUser.photoUrl)),
           ),
           ListTile(
             leading: FaIcon(
@@ -82,8 +84,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.question,
-              color: Colors.blue,
+              FontAwesomeIcons.infoCircle,
+              color: Colors.blueGrey,
               size: 28,
             ),
             trailing: Icon(Icons.navigate_next),
@@ -102,12 +104,12 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             leading: FaIcon(
               FontAwesomeIcons.checkCircle,
-              color: Colors.blue,
+              color: Colors.teal,
               size: 28,
             ),
             trailing: Icon(Icons.navigate_next),
             title: Text(
-              'Política de Privacidad',
+              'Política de privacidad',
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () async {
@@ -129,7 +131,7 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              loginState.logout();
+              appState.logout();
             },
           ),
         ],
