@@ -53,7 +53,12 @@ class AppState with ChangeNotifier {
         Firestore.instance
             .collection('users')
             .document(googleSignIn.currentUser.email)
-            .setData({'points':0,'reviewed5Star':false,'dailyReward':false,'playerID':null});
+            .setData({
+          'points': 0,
+          'reviewed5Star': false,
+          'dailyReward': false,
+          'playerID': null
+        });
       }
     }));
   }
@@ -62,16 +67,18 @@ class AppState with ChangeNotifier {
     AppLovin.requestInterstitial((AppLovinAdListener event) {
       listener(event, true);
       if (event == AppLovinAdListener.adHidden) {
-         Firestore.instance
+        Firestore.instance
             .collection('users')
-            .document(googleSignIn.currentUser.email).get().then((doc){
-              
-            });
+            .document(googleSignIn.currentUser.email)
+            .get()
+            .then((doc) {
+          points = doc.data['points'];
+        });
         points += 10;
         Firestore.instance
             .collection('users')
             .document(googleSignIn.currentUser.email)
-            .updateData({'points': 1200});
+            .updateData({'points': points});
       }
     }, interstitial: true);
   }
