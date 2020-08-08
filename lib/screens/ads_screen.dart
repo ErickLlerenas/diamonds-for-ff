@@ -37,11 +37,11 @@ class _AdsScreenState extends State<AdsScreen> {
                     children: <Widget>[
                       Text(
                         '+25',
-                        style:TextStyle(fontSize: 24,color: Colors.yellow[800],fontWeight: FontWeight.bold),
+                        style:TextStyle(fontSize: 24,color: Colors.yellow[900],fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'Recompensa diaria',
-                        style: TextStyle(fontSize: 18,color: Colors.yellow[800],fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 18,color: Colors.yellow[900],fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -61,11 +61,11 @@ class _AdsScreenState extends State<AdsScreen> {
                     children: <Widget>[
                       Text(
                         '+10',
-                        style: TextStyle(fontSize: 24,color: Colors.blue[800],fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 24,color: Colors.blue[900],fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'Ganar puntos',
-                        style: TextStyle(fontSize: 18,color: Colors.blue[800],fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 18,color: Colors.blue[900],fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
