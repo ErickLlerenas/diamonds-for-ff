@@ -14,6 +14,7 @@ class AppState with ChangeNotifier {
   bool loading = false;
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   TextEditingController _controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   AppState() {
     AppLovin.init();
@@ -161,14 +162,21 @@ class AppState with ChangeNotifier {
               style: TextStyle(
                   color: Colors.grey[700], fontWeight: FontWeight.bold)),
           content: Container(
-            height: info != null ? 175 : 120,
+            height: info != null ? 190 : 145,
             child: Column(
               children: <Widget>[
                 Form(
+                  key: _formKey,
                   child: TextFormField(
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Por favor ingresa tu ID de jugador.';
+                      }
+                      return null;
+                    },
                     textAlign: TextAlign.center,
                     decoration:
-                        InputDecoration(hintText: 'Ingresa tu ID de jugador'),
+                        InputDecoration(hintText: 'ID de jugador'),
                     controller: _controller,
                   ),
                 ),
@@ -188,25 +196,28 @@ class AppState with ChangeNotifier {
                 !loading
                     ? FlatButton(
                         onPressed: () {
-                          loading = true;
-                          Firestore.instance
-                              .collection('users')
-                              .document(googleSignIn.currentUser.email)
-                              .get()
-                              .then((doc) {
-                            loading = false;
-                            points = doc.data['points'];
-                            Navigator.pop(context);
-                            if (points >= cost) {
-                              _showConfirmDiamondsDialog(context,
-                                  cost: cost,
-                                  diamonds: diamonds,
-                                  playerID: _controller.text);
-                            } else {
-                              _showInsufficientPointsDialog(context);
-                            }
-                          });
-                          notifyListeners();
+                          if (_formKey.currentState.validate()) {
+                            loading = true;
+                            Firestore.instance
+                                .collection('users')
+                                .document(googleSignIn.currentUser.email)
+                                .get()
+                                .then((doc) {
+                              loading = false;
+                              points = doc.data['points'];
+                              Navigator.pop(context);
+                              if (points >= cost) {
+                                _showConfirmDiamondsDialog(context,
+                                    cost: cost,
+                                    diamonds: diamonds,
+                                    playerID: _controller.text,
+                                    info: info);
+                              } else {
+                                _showInsufficientPointsDialog(context);
+                              }
+                            });
+                            notifyListeners();
+                          }
                         },
                         child: Text("Canjear por $cost puntos"),
                         color: Colors.blue,
@@ -265,7 +276,7 @@ class AppState with ChangeNotifier {
   }
 
   void _showConfirmDiamondsDialog(context,
-      {String playerID, int diamonds, int cost}) {
+      {String playerID, int diamonds, int cost,String info}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -280,11 +291,12 @@ class AppState with ChangeNotifier {
               height: 140,
               child: Column(
                 children: <Widget>[
-                  Text(
+                  info==null? Text(
                     "¿Quieres canjear $cost puntos por $diamonds diamantes? Tus diamantes llegarán en unas horas.",
                     style: TextStyle(color: Colors.grey[700]),
                     textAlign: TextAlign.center,
-                  ),
+                  ):Text("$info",style: TextStyle(color: Colors.grey[700]),
+                    textAlign: TextAlign.center,),
                   SizedBox(
                     height: 10,
                   ),
