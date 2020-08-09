@@ -17,7 +17,7 @@ class _PointsScreenState extends State<PointsScreen> {
         body: StreamBuilder<DocumentSnapshot>(
             stream: Firestore.instance.collection('users').document('${appState.googleSignIn.currentUser.email}').snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('Cargando...');
+              if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
