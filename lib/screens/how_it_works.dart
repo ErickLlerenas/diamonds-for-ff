@@ -35,11 +35,82 @@ class HowItWorks extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non auctor tortor, vel molestie neque. Quisque a tellus sed dolor laoreet ultrices. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce vel diam gravida augue pharetra ultrices. Quisque tincidunt neque nec fermentum iaculis. Vivamus euismod efficitur diam. Sed sed massa ultrices, porttitor enim a, commodo odio. Maecenas placerat est turpis, a volutpat mi faucibus sed. Pellentesque faucibus, nibh a lacinia accumsan, nibh arcu pretium magna, in dignissim magna nulla pharetra neque. Nullam augue arcu, lobortis nec vehicula vestibulum, fringilla ut eros. In ut lectus arcu. Mauris ac nisl id tortor aliquam ullamcorper. Vivamus quis ultrices erat. Mauris eleifend tristique metus, non accumsan eros efficitur ut. Etiam pellentesque tincidunt posuere.',
+                'Genera puntos',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Consigue puntos facilmente en la pantalla de "Ganar". Presiiona el botón de +10 y empieza a acumular puntos.',
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
-              SizedBox(height: 30)
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Recompensa Diaria',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+              ),
+              Text(
+                'Cada día tienes la posibilidad de reclamar PUNTOS DIARIOS, se habilitará un botón con la opción de obtener tu recompensa cada vez que este disponible.',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+              ),
+              SizedBox(height: 30),
+              Text(
+                'Puntos Obtenidos',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Puedes revisar tu cartera de puntos en la ventana de PUNTOS. Acumula para para conseguir grandes recompensas.',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+              ),
+              SizedBox(height: 30),
+              Text(
+                'Gana Premios',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Canjea tus puntos por recompensas en la ventana de PREMIOS. Selecciona la recompensa que deseas canjear, ingresa tu ID de jugador y ¡Listo!, después de un lapso de tiempo tu recompensa será añadida a tu cuenta de FF.',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Tarjeta Semanal',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+              ),
+              Text(
+                'Puedes canjear tus puntos por una tarjeta semanal de FF. Reclama 60 diamantes en juego cada día durante 7 días! ¡Recibirás 420 diamantes en total',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+              ),
+              SizedBox(height: 30),
             ],
           ),
         ),

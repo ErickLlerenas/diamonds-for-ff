@@ -25,7 +25,7 @@ class MyDrawer extends StatelessWidget {
                 backgroundImage:
                     NetworkImage(appState.googleSignIn.currentUser.photoUrl)),
           ),
-          appState.reviewed5Star?Container(): ListTile(
+          ListTile(
             leading: FaIcon(
               FontAwesomeIcons.solidStar,
               color: Colors.yellow[700],
@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
             ),
             trailing: Icon(Icons.navigate_next),
             title: Text(
-              'Danos 5 estrellas',
+              'Califica nuestra app',
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () {
@@ -72,7 +72,8 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () async {
-              appState.launchURL("https://erickllerenas.github.io/diamantes-free-fire-policy/");
+              appState.launchURL(
+                  "https://erickllerenas.github.io/diamantes-free-fire-policy/");
               Navigator.pop(context);
             },
           ),
