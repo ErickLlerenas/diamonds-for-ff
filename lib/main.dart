@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         theme: new ThemeData(
             primarySwatch: Colors.grey,
             primaryTextTheme:
-                TextTheme(headline: TextStyle(color: Colors.white))),
+                TextTheme(headline6: TextStyle(color: Colors.white))),
         debugShowCheckedModeBanner: false,
         home: appState.isLoggedIn ? Home() : LogInGoogle());
   }

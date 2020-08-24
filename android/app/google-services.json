@@ -1,42 +1,50 @@
 {
   "project_info": {
-    "project_number": "823715229571",
-    "firebase_url": "https://diamonds-ff-47c1d.firebaseio.com",
-    "project_id": "diamonds-ff-47c1d",
-    "storage_bucket": "diamonds-ff-47c1d.appspot.com"
+    "project_number": "476051631057",
+    "firebase_url": "https://gana-diamantes-para-free-7a243.firebaseio.com",
+    "project_id": "gana-diamantes-para-free-7a243",
+    "storage_bucket": "gana-diamantes-para-free-7a243.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:823715229571:android:c991e61d7ac5c178cf10b6",
+        "mobilesdk_app_id": "1:476051631057:android:c4afc74583ad9560910ef0",
         "android_client_info": {
-          "package_name": "com.example.diamonds_for_ff"
+          "package_name": "com.yaaapp.diamonds_for_ff"
         }
       },
       "oauth_client": [
         {
-          "client_id": "823715229571-gol7nlou7mcbalra3qan0abr9j6j9tie.apps.googleusercontent.com",
+          "client_id": "476051631057-in25tapm9tp78sv2v4qo3m89ms9haitg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.diamonds_for_ff",
+            "package_name": "com.yaaapp.diamonds_for_ff",
             "certificate_hash": "5e8557e9275cd091b80649394052791e7e6ed9e7"
           }
         },
         {
-          "client_id": "823715229571-2i2k5sjg7dia2n0u9k81lmmvdm4l0rdt.apps.googleusercontent.com",
+          "client_id": "476051631057-8hhlljvf5kbav84nc87mnu91qmmhmi40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yaaapp.diamonds_for_ff",
+            "certificate_hash": "e39a4a8afbb274f2618902b0ac4f0906dd696d57"
+          }
+        },
+        {
+          "client_id": "476051631057-79cvde83su1543faa2nr53skuhspae8i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArJ-GAPPmg465n1YBo8X7w8drgwcKj_GI"
+          "current_key": "AIzaSyDi7seJcFN8em9llyZkLGTAGImIytRwpJY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "823715229571-2i2k5sjg7dia2n0u9k81lmmvdm4l0rdt.apps.googleusercontent.com",
+              "client_id": "476051631057-79cvde83su1543faa2nr53skuhspae8i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

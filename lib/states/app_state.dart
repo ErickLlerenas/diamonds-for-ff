@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:applovin/applovin.dart';
+import 'package:adcolony/adcolony.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 class AppState with ChangeNotifier {
   int points = 0;
   bool isLoggedIn = false;
-  bool reviewed5Star = false;
   int dailyReward;
   bool dailyRewardBtn = false;
   bool loading = false;
@@ -17,7 +16,8 @@ class AppState with ChangeNotifier {
   final _formKey = GlobalKey<FormState>();
 
   AppState() {
-    AppLovin.init();
+    AdColony.init(AdColonyOptions(
+        'app079c7330bbf04c0cb0', '0', ['vze61101d6b0b34ebf96']));
   }
 
   Future login() async {
@@ -38,14 +38,12 @@ class AppState with ChangeNotifier {
     notifyListeners();
   }
 
-  void _listener(AppLovinAdListener event, bool isInter) {
-    if (event == AppLovinAdListener.adReceived) {
-      AppLovin.showInterstitial(interstitial: isInter);
-    }
+  void _listener(AdColonyAdListener event) {
+    if (event == AdColonyAdListener.onRequestFilled) AdColony.show();
+    if (event == AdColonyAdListener.onClosed) _addPoints(10);
   }
 
   void _initValuesFireStore() {
-    //Checks if the user has been registered before, if not creates an instance
     Firestore.instance
         .collection('users')
         .document(googleSignIn.currentUser.email)
@@ -55,12 +53,7 @@ class AppState with ChangeNotifier {
         Firestore.instance
             .collection('users')
             .document(googleSignIn.currentUser.email)
-            .setData({
-          'points': 0,
-          'reviewed5Star': false,
-          'dailyReward': false,
-          'playerID': null
-        });
+            .setData({'points': 0, 'dailyReward': 0, 'playerID': null});
       }
     });
   }
@@ -82,12 +75,7 @@ class AppState with ChangeNotifier {
   }
 
   void requestInterstitial() {
-    AppLovin.requestInterstitial((AppLovinAdListener event) {
-      _listener(event, true);
-      if (event == AppLovinAdListener.adHidden) {
-        _addPoints(10);
-      }
-    }, interstitial: true);
+    AdColony.request('vze61101d6b0b34ebf96', _listener);
   }
 
   void reclaimDailyReward() {
@@ -116,7 +104,6 @@ class AppState with ChangeNotifier {
         .then((doc) {
       if (doc.exists) {
         dailyReward = doc.data['dailyReward'];
-        reviewed5Star = doc.data['reviewed5Star'];
         if (int.parse(DateTime.now().day.toString()) != dailyReward) {
           dailyRewardBtn = true;
         } else {
@@ -127,7 +114,7 @@ class AppState with ChangeNotifier {
     });
   }
 
-  void _buyDiamonds(int diamonds, int cost) {
+  void _buyDiamonds(context, int diamonds, int cost, String playerID) async {
     Firestore.instance
         .collection('users')
         .document(googleSignIn.currentUser.email)
@@ -140,16 +127,6 @@ class AppState with ChangeNotifier {
 
   void launchURL(String url) async {
     if (await canLaunch(url)) launch(url);
-  }
-
-  void _user5StarReviewed() {
-    Firestore.instance
-        .collection('users')
-        .document(googleSignIn.currentUser.email)
-        .updateData({'reviewed5Star': true});
-    reviewed5Star = true;
-    _addPoints(100);
-    notifyListeners();
   }
 
   void showBuyDiamondsDialog(context, {int diamonds, int cost, String info}) {
@@ -175,8 +152,7 @@ class AppState with ChangeNotifier {
                       return null;
                     },
                     textAlign: TextAlign.center,
-                    decoration:
-                        InputDecoration(hintText: 'ID de jugador'),
+                    decoration: InputDecoration(hintText: 'ID de jugador'),
                     controller: _controller,
                   ),
                 ),
@@ -260,7 +236,9 @@ class AppState with ChangeNotifier {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   FlatButton(
                     color: Colors.grey[700],
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: Text(
                       "Chale",
                       style: TextStyle(color: Colors.white),
@@ -276,7 +254,7 @@ class AppState with ChangeNotifier {
   }
 
   void _showConfirmDiamondsDialog(context,
-      {String playerID, int diamonds, int cost,String info}) {
+      {String playerID, int diamonds, int cost, String info}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -291,19 +269,24 @@ class AppState with ChangeNotifier {
               height: 140,
               child: Column(
                 children: <Widget>[
-                  info==null? Text(
-                    "¿Quieres canjear $cost puntos por $diamonds diamantes? Tus diamantes llegarán en unas horas.",
-                    style: TextStyle(color: Colors.grey[700]),
-                    textAlign: TextAlign.center,
-                  ):Text("$info",style: TextStyle(color: Colors.grey[700]),
-                    textAlign: TextAlign.center,),
+                  info == null
+                      ? Text(
+                          "¿Quieres canjear $cost puntos por $diamonds diamantes? Tus diamantes llegarán en unas horas.",
+                          style: TextStyle(color: Colors.grey[700]),
+                          textAlign: TextAlign.center,
+                        )
+                      : Text(
+                          "$info",
+                          style: TextStyle(color: Colors.grey[700]),
+                          textAlign: TextAlign.center,
+                        ),
                   SizedBox(
                     height: 10,
                   ),
                   FlatButton(
                     onPressed: () {
-                      _buyDiamonds(diamonds, cost);
                       Navigator.pop(context);
+                      _buyDiamonds(context, diamonds, cost, playerID);
                     },
                     child: Text("Confirmar"),
                     color: Colors.blue,
@@ -323,7 +306,7 @@ class AppState with ChangeNotifier {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: Text("¡Gana 100 puntos!",
+          title: Text("Califica la app",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.grey[700], fontWeight: FontWeight.bold)),
@@ -332,7 +315,7 @@ class AppState with ChangeNotifier {
             child: Column(
               children: <Widget>[
                 Text(
-                  "Danos una reseña de 5 estrellas y recibe 100 puntos.",
+                  "¿Te gusta la Aplicación? Danos una reseña",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey[700]),
                 ),
@@ -343,7 +326,6 @@ class AppState with ChangeNotifier {
                   onPressed: () async {
                     launchURL(
                         "https://play.google.com/store/apps/details?id=com.ejele.tracker");
-                    _user5StarReviewed();
                     Navigator.pop(context);
                   },
                   child: Text("Dar reseña"),

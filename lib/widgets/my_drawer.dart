@@ -25,22 +25,6 @@ class MyDrawer extends StatelessWidget {
                 backgroundImage:
                     NetworkImage(appState.googleSignIn.currentUser.photoUrl)),
           ),
-          appState.reviewed5Star?Container(): ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.solidStar,
-              color: Colors.yellow[700],
-              size: 28,
-            ),
-            trailing: Icon(Icons.navigate_next),
-            title: Text(
-              'Danos 5 estrellas',
-              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              appState.show5StarReviewDialog(context);
-            },
-          ),
           ListTile(
             leading: FaIcon(
               FontAwesomeIcons.infoCircle,
@@ -72,7 +56,8 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             onTap: () async {
-              appState.launchURL("https://erickllerenas.github.io/diamantes-free-fire-policy/");
+              appState.launchURL(
+                  "https://erickllerenas.github.io/diamantes-free-fire-policy/");
               Navigator.pop(context);
             },
           ),
