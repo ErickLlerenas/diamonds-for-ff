@@ -44,7 +44,6 @@ class AppState with ChangeNotifier {
   }
 
   void _initValuesFireStore() {
-    //Checks if the user has been registered before, if not creates an instance
     Firestore.instance
         .collection('users')
         .document(googleSignIn.currentUser.email)
@@ -54,12 +53,7 @@ class AppState with ChangeNotifier {
         Firestore.instance
             .collection('users')
             .document(googleSignIn.currentUser.email)
-            .setData({
-          'points': 0,
-          'reviewed5Star': false,
-          'dailyReward': false,
-          'playerID': null
-        });
+            .setData({'points': 0, 'dailyReward': 0, 'playerID': null});
       }
     });
   }

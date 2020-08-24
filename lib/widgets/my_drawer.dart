@@ -27,22 +27,6 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.solidStar,
-              color: Colors.yellow[700],
-              size: 28,
-            ),
-            trailing: Icon(Icons.navigate_next),
-            title: Text(
-              'Califica nuestra app',
-              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              appState.show5StarReviewDialog(context);
-            },
-          ),
-          ListTile(
-            leading: FaIcon(
               FontAwesomeIcons.infoCircle,
               color: Colors.blueGrey,
               size: 28,

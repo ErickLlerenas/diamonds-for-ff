@@ -19,15 +19,11 @@ class _AdsScreenState extends State<AdsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Gana monedas",
+                "Gana puntos",
                 style: TextStyle(
                     color: Colors.grey[700],
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
-              ),
-              Text(
-                "Mira anuncios y empieza a ganar",
-                style: TextStyle(color: Colors.grey[700]),
               ),
               Container(
                   height: MediaQuery.of(context).size.height / 3,
